@@ -27,12 +27,12 @@ client.on('message', (msg) => {
 
     const musicQueue = queue.get(msg.guild.id);
 
-    let command = msg.content.substring(0, msg.content.indexOf(" "));
-
-    if(msg.content.substring(msg.content.indexOf(" ")).length < 1 || msg.content.indexOf(" ") === null);
+    let command = msg.content.substring(0, msg.content.indexOf(" ") + 1);
+    console.log(command);
+    if(command.trim() === "")
         command = msg.content;
-
-    switch(command){
+    console.log("COMMAND"+command);
+    switch(command.trim()){
         case `${prefix}rubot`:
             msg.reply("Hullo");
             break;
@@ -126,7 +126,7 @@ function play(guild, song){
 
 function skip(message, musicQueue) {
     if(!message.member.voice.channel)
-        return message.reply("You need to be in a voice channel first");
+        return message.reply("You need to be in a voice channel first.");
     if(!musicQueue)
         return message.channel.send("Theres is no next song.");
     musicQueue.connection.dispatcher.end();
@@ -135,6 +135,9 @@ function skip(message, musicQueue) {
 function stop(message, musicQueue) {
     if(!message.member.voice.channel)
         return message.reply("You need to be in a voice channel first");
+    if(!musicQueue)
+        return message.channel.send("There's nothing playing right now, you dumb fuck.");
     musicQueue.songs = [];
     musicQueue.connection.dispatcher.end();
+    return message.reply("Fine, I'll leave. Fuck you.");
 }
