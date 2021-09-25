@@ -17,6 +17,6 @@
     "ffmpeg-static": "^4.2.5",
     "fluent-ffmpeg": "^2.1.2",
     "pm2": "^4.4.0",
-    "ytdl-core": "^2.1.7"
+    "ytdl-core": "^4.9.1"
   }
 }
